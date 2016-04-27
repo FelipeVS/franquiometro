@@ -12,15 +12,15 @@ var app = express();
 
 var MongoClient = require('mongodb').MongoClient;
 
-MongoClient.connect(' mongodb://admin:user-admin@ds021741.mlab.com:21741/franquiometro', function(err, db) {
+MongoClient.connect('mongodb://admin:user-admin@ds021741.mlab.com:21741/franquiometro', function(err, db) {
   if (err) {
     throw err;
   }
-  db.collection('users').find().toArray(function(err, result) {
+  db.collection('isp').find().toArray(function(err, result) {
     if (err) {
       throw err;
     }
-    console.log(result);
+    console.log('DB TEST', result);
   });
 });
 
