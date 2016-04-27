@@ -10,6 +10,22 @@ var users = require('./routes/users');
 
 var app = express();
 
+var MongoClient = require('mongodb').MongoClient;
+
+MongoClient.connect(' mongodb://admin:user-admin@ds021741.mlab.com:21741/franquiometro', function(err, db) {
+  if (err) {
+    throw err;
+  }
+  db.collection('users').find().toArray(function(err, result) {
+    if (err) {
+      throw err;
+    }
+    console.log(result);
+  });
+});
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
