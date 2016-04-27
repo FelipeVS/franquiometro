@@ -25,7 +25,6 @@ MongoClient.connect(' mongodb://admin:user-admin@ds021741.mlab.com:21741/franqui
 });
 
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
