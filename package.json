@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "./public/ npm install && bower install && node ./bin/www"
+    "prestart": "gulp build",
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -15,5 +16,8 @@
     "serve-favicon": "~2.3.0",
     "mongodb": "~2.1.17",
     "monk": "^1.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
   }
 }
