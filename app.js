@@ -7,23 +7,9 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var isps = require('./routes/isps');
 
 var app = express();
-
-var MongoClient = require('mongodb').MongoClient;
-
-MongoClient.connect('mongodb://admin:user-admin@ds021741.mlab.com:21741/franquiometro', function(err, db) {
-  if (err) {
-    throw err;
-  }
-  db.collection('isp').find().toArray(function(err, result) {
-    if (err) {
-      throw err;
-    }
-    console.log('DB TEST', result);
-  });
-});
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,13 +18,22 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
+app.all('/*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/api/users', users);
+app.use('/api/isps', isps);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

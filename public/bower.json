@@ -1,0 +1,20 @@
+{
+  "name": "public",
+  "description": "",
+  "main": "index.html",
+  "authors": [
+    "FelipeVS <osolevepilef@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/FelipeVS/franquiometro",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-strap": "^2.3.8"
+  }
+}
