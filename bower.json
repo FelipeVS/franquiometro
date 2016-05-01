@@ -1,12 +1,13 @@
 {
-  "name": "public",
+  "name": "franquiometro",
   "description": "",
-  "main": "index.html",
+  "main": "app.js",
   "authors": [
     "FelipeVS <osolevepilef@gmail.com>"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "homepage": "https://github.com/FelipeVS/franquiometro",
+  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
