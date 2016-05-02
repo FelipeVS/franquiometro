@@ -1,0 +1,27 @@
+<div class="image">
+  <img src="images/smile.png">
+</div>
+
+<div class="text">
+  <h1> Provedor? </h1>
+  <p> Qual o seu provedor, plano, preço, etc. </p>
+  <button type="button" class="btn btn-default" ng-model="vm.userIsp" data-html="1" bs-options="isp as isp.name for isp in vm.isps" bs-select>
+    Selecionar <span class="caret"></span>
+  </button>
+  <hr>
+
+  <p ng-if="vm.userIsp">
+    {{vm.userIsp.name}}
+    <br>
+    <button type="button" class="btn btn-default" ng-model="vm.userIsp" data-html="1" bs-options="plan as plan.title for plan in vm.userIsp.plans" bs-select ng-if="vm.userIsp.plans.length" ng-change="vm.nextStep()">
+      Selecionar <span class="caret"></span>
+    </button>
+  </p>
+
+
+  <!-- You can use a custom html template with the `data-template` attr -->
+  <button type="button" class="btn btn-lg btn-danger" data-animation="am-fade-and-slide-top" data-template-url="layout/modal/newIsp.html" bs-modal="vm.newIspModal" ng-if="!vm.userIsp || vm.userIsp==null">
+    Não encontrou o seu?
+  </button>
+
+</div>

@@ -6,8 +6,9 @@
         /* Angular modules */
         'ui.router',
         'mgcrea.ngStrap',
-        'ng-fx',
-        'ngAnimate'
+        // 'ng-fx',
+        'ngAnimate',
+        'ngSanitize'
         /* Cross-app module */
         // 'my.appModule',
 

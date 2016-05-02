@@ -13,8 +13,8 @@
     function ispsService($http, $q, serverUrl) {
         var service = {
             getAll: getAll,
-            saveCenter: saveCenter,
-            getCenter: getCenter
+            postIsp: postIsp,
+            getIsp: getIsp
         };
         var isp;
 
@@ -35,17 +35,30 @@
                 return isps;
             }
 
-            function getIspsFailed(error) {
-                console.log('XHR Failed for getIsps.', error);
+            function getIspsFailed(data, status, header, config) {
+              console.log("GET ERROR!\n Data: ", data, "\n Status: ", status, "\n Headers: ", header, "\n Config: ", config)
             }
         }
 
-        function saveCenter (selected) {
-            console.log('Saving isp to later:', selected);
-            isp = selected;
+        function postIsp (isp) {
+          $http.post(serverUrl + 'api/isps/', isp, {
+              headers : {
+                'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+              }
+            })
+           .then(postIspComplete)
+           .catch(postIspFailed);
+
+           function postIspComplete(response) {
+              console.log("POST successful!", response)
+           }
+           function postIspFailed(data, status, header, config) {
+              console.log("POST ERROR!\n Data: ", data, "\n Status: ", status, "\n Headers: ", header, "\n Config: ", config)
+           }
+
         }
 
-        function getCenter () {
+        function getIsp () {
             return isp;
         }
 

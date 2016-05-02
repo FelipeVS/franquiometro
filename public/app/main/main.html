@@ -1,15 +1,18 @@
-<div class="image">
-  <img src="images/smile.png">
-</div>
+<!-- presentation template -->
+<ng-include src="'app/layout/presentation.html'" ng-if="vm.appStep==0"></ng-include>
+<!-- first step template -->
+<ng-include src="'app/layout/firstStep.html'" ng-if="vm.appStep==1"></ng-include>
+<!-- second step template -->
+<ng-include src="'app/layout/secondStep.html'" ng-if="vm.appStep==2"></ng-include>
+<!-- third step template -->
+<ng-include src="'app/layout/thirdStep.html'" ng-if="vm.appStep==3"></ng-include>
 
-<div class="text">
-  <h1>Franquiômetro</h1>
-  <p>A sua calculora de consumo de GIGABYTES! </p>
-  <p>Please check the url or go to <a href="#">main page</a> and see if you can locate what you are looking for</p>
-</div>
-
-<div class="bigButton">
-  <button type="button" class="btn btn-default" ng-click="vm.startCalc">
-    Calcular o quanto {{userIP.isp}} vai te ferrar!
+<!-- navigation -->
+<div class="bigButton" ng-hide="vm.appStep==0 || vm.appStep==3">
+  <button type="button" class="btn btn-default" ng-click="vm.prevStep()">
+    Voltar
+  </button>
+  <button type="button" class="btn btn-default" ng-click="vm.nextStep()">
+    Próximo
   </button>
 </div>
