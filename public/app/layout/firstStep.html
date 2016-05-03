@@ -1,27 +1,41 @@
 <div class="image">
-  <img src="images/smile.png">
+  <!-- <img src="images/smile.png"> -->
 </div>
 
 <div class="text">
   <h1> Provedor? </h1>
   <p> Qual o seu provedor, plano, preço, etc. </p>
-  <button type="button" class="btn btn-default" ng-model="vm.userIsp" data-html="1" bs-options="isp as isp.name for isp in vm.isps" bs-select>
-    Selecionar <span class="caret"></span>
-  </button>
-  <hr>
 
-  <p ng-if="vm.userIsp">
-    {{vm.userIsp.name}}
-    <br>
-    <button type="button" class="btn btn-default" ng-model="vm.userIsp" data-html="1" bs-options="plan as plan.title for plan in vm.userIsp.plans" bs-select ng-if="vm.userIsp.plans.length" ng-change="vm.nextStep()">
-      Selecionar <span class="caret"></span>
-    </button>
-  </p>
+  <form class="form-inline" role="form">
 
+    <div class="form-group">
+      <label> Provedor </label>
+      <input class="form-control" ng-model="vm.userIsp.name" ng-change="vm.ispSelection('name')" bs-options="isp.name for isp in vm.isps" placeholder="Nome do provedor" ng-required="required" bs-typeahead type="text">
+    </div>
 
-  <!-- You can use a custom html template with the `data-template` attr -->
-  <button type="button" class="btn btn-lg btn-danger" data-animation="am-fade-and-slide-top" data-template-url="layout/modal/newIsp.html" bs-modal="vm.newIspModal" ng-if="!vm.userIsp || vm.userIsp==null">
-    Não encontrou o seu?
+    <div class="form-group" ng-if="vm.userIsp.name">
+      <label> Velocidade de <strong>Download</strong> Contratada </label>
+      <input class="form-control" ng-model="vm.userIsp.plan.download.value" ng-change="vm.ispSelection('download')" bs-options="speed for speed in vm.speeds" placeholder="xx Mbps" ng-required="required" bs-typeahead type="text" pattern="[0-9]+([\.,][0-9]+)*">
+      <select class="" name="dowload-unit" id="dowload-unit" ng-model="vm.userIsp.plan.download.unit" ng-if="vm.userIsp.plan.download.value" ng-required="required">
+        <option ng-repeat="unit in vm.speedUnits" value="{{unit}}">
+          {{unit}}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group" ng-if="vm.userIsp.plan.download.unit">
+      <label> Velocidade de <strong>Upload</strong> Contratada </label>
+      <input class="form-control" ng-model="vm.userIsp.plan.upload.value" ng-change="vm.ispSelection('upload')" bs-options="speed for speed in vm.speeds" placeholder="xx Mbps" ng-required="required" bs-typeahead type="number">
+      <select class="" name="upload-unit" id="upload-unit" ng-model="vm.userIsp.plan.upload.unit" ng-if="vm.userIsp.plan.upload.value" ng-required="required">
+        <option ng-repeat="unit in vm.speedUnits" value="{{unit}}">
+          {{unit}}
+        </option>
+      </select>
+    </div>
+  </form>
+
+  <button type="button" class="btn btn-default" ng-if="vm.firstStepCompleted()" ng-click="vm.nextStep()">
+    Próximo
   </button>
 
 </div>

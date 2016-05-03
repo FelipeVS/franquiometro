@@ -6,13 +6,3 @@
 <ng-include src="'app/layout/secondStep.html'" ng-if="vm.appStep==2"></ng-include>
 <!-- third step template -->
 <ng-include src="'app/layout/thirdStep.html'" ng-if="vm.appStep==3"></ng-include>
-
-<!-- navigation -->
-<div class="bigButton" ng-hide="vm.appStep==0 || vm.appStep==3">
-  <button type="button" class="btn btn-default" ng-click="vm.prevStep()">
-    Voltar
-  </button>
-  <button type="button" class="btn btn-default" ng-click="vm.nextStep()">
-    Próximo
-  </button>
-</div>

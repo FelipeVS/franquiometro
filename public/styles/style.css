@@ -80,6 +80,26 @@ p{
 	position: fixed;
 	bottom:0
 }
+.nav-steps {
+	margin-top: 50px;
+	position: relative;
+	bottom:0
+}
+.form-control:focus, select:focus {
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
+	border: none;
+	box-shadow: none;
+}
+
+.form-control, select{
+	text-decoration: underline;
+	font-weight:normal;
+	background-color: transparent;
+	border: none;
+	box-shadow: none;
+}
 
 /*---- responsive-design -----*/
 

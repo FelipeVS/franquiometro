@@ -5,17 +5,13 @@
     .module('app')
     .run(runBlock);
 
-    runBlock.$inject = ['$rootScope','ipService'];
+    runBlock.$inject = [];
 
-    function runBlock($rootScope, ipService) {
+    function runBlock() {
 
         activate();
 
         function activate() {
-          // Get user's ip
-          ipService.get().then(function(response) {
-            $rootScope.userIP = response
-          });
         }
     }
 })();
