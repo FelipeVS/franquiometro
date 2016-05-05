@@ -1,38 +1,61 @@
 var express = require('express');
 var router = express.Router();
-var bodyParser = require('body-parser');
-var MongoClient = require('mongodb').MongoClient;
-var databaseUrl = 'mongodb://admin:user-admin@ds021741.mlab.com:21741/franquiometro';
-var cors = require('cors');
+var isps = require('../models/isps');
 
-/* GET isps listing. */
 router.get('/', function(req, res, next) {
-  MongoClient.connect(databaseUrl, function(err, db) {
-    if (err) {
-      throw err;
-    }
-    db.collection('isp').find().toArray(function(err, result) {
-      if (err) {
-        throw err;
-      }
-      res.send(result);
-    });
-  });
+  isps.find({}, function(err, data) {
+		if (err) {
+			res.sendStatus(500);
+		} else {
+      console.log('data:', data);
+			res.json(data);
+		}
+	});
 });
+router.get('/:id', function(req, res, next) {
+  var query = { _id: req.params.id };
+	isps.findOne(query, function(err, data) {
+		if (err || data == null) {
+			res.sendStatus(404);
+		} else {
+			res.json(data);
+		}
+	});
+});
+router.post('/', function(req, res, next) {
+  var isp = new isps(req.body);
+	isp.save(function(err, data) {
+		console.log('Post data:', req.body);
+		if (err) {
+			res.status(400).json(err);
+		} else {
+			res.status(201).json(data);
+		}
+	});
+});
+router.put('/isps/:id', function(req, res, next) {
+  var query = { _id: req.params.id };
+	var mod = req.body;
+	delete mod._id;
 
-/* POST isps listing. */
-router.post('/', cors(), function(req, res, next) {
-  MongoClient.connect(databaseUrl, function(err, db) {
-    if (err) {
-      throw err;
-    }
-    db.collection('isp').insert(req.body, function(err, doc) {
-      if (err) {
-        throw err;
-      }
-      res.send(doc);
-    });
-  });
+	isps.update(query, mod, function(err, data) {
+		if (err) {
+			res.status(400).json(err);
+		} else {
+			res.json(data);
+		}
+	});
+});
+router.delete('/:id', function(req, res, next) {
+  var query = { _id: req.params.id };
+
+	isps.remove(query, function(err, data) {
+		if (err) {
+			res.status(400).json(err);
+		} else {
+			res.json(data);
+		}
+	});
 });
 
 module.exports = router;

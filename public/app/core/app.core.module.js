@@ -5,7 +5,7 @@
     .module('app.core', [
         /* Angular modules */
         'ui.router',
-        'mgcrea.ngStrap',
+        'ui.bootstrap',
         // 'ng-fx',
         'ngAnimate',
         'ngSanitize'

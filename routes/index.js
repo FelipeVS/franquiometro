@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.send('Franquiometro API v1. Criado por Felipe Veloso. Uso restrito.');
 });
 
 module.exports = router;

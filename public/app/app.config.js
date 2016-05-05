@@ -5,9 +5,10 @@
     .module('app')
     .config(configure);
 
-    configure.$inject = [];
+    configure.$inject = ['$locationProvider'];
 
-    function configure () {
-
+    function configure ($locationProvider) {
+      // remove the harsh (#/) of the url
+      $locationProvider.html5Mode(true);
     }
 })();

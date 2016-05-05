@@ -35,8 +35,8 @@
                 return isps;
             }
 
-            function getIspsFailed(data, status, header, config) {
-              console.log("GET ERROR!\n Data: ", data, "\n Status: ", status, "\n Headers: ", header, "\n Config: ", config)
+            function getIspsFailed(data) {
+              console.log("GET ERROR!\nData: ", data.data, "\nStatus: ", data.status, "\nHeaders: ", data.header, "\nConfig: ", data.config)
             }
         }
 
@@ -52,8 +52,8 @@
            function postIspComplete(response) {
               console.log("POST successful!", response)
            }
-           function postIspFailed(data, status, header, config) {
-              console.log("POST ERROR!\n Data: ", data, "\n Status: ", status, "\n Headers: ", header, "\n Config: ", config)
+           function postIspFailed(data) {
+              console.log("POST ERROR!\nData: ", data.data, "\nStatus: ", data.status, "\nHeaders: ", data.header, "\nConfig: ", data.config)
            }
 
         }
