@@ -38,7 +38,7 @@ app.use('/api/isps', api.isps);
 app.use('/api/users', api.users);
 
 
-app.use('/', express.static(path.join(__dirname, '../public')));
+app.use('/', express.static(path.join(root, '/public')));
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
