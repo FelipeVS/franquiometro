@@ -1,5 +1,5 @@
 var compression = require('compression');
-var express = require('express');
+// var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
@@ -14,9 +14,7 @@ module.exports = function(app, config) {
   //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
   app.use(logger('dev'));
   app.use(cors());
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.urlencoded({ extended: true }))
+  app.use(bodyParser.json())
   app.use(cookieParser());
-
-
 };

@@ -19,5 +19,4 @@ var ispModel = new mongoose.Schema({
 	collection : 'isps'
 }
 );
-
 module.exports = mongoose.model('ispModel', ispModel);

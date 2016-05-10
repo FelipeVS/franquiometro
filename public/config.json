@@ -1,0 +1,12 @@
+{
+  "name": "app.core.constants",
+  "production": {
+    "serverUrl": "http://franquiometro.herokuapp.com"
+  },
+  "development": {
+    "serverUrl": "http://localhost:3000"
+  },
+  "test": {
+    "serverUrl": "http://localhost:3000"
+  }
+}

@@ -23,7 +23,7 @@
         ////////////////
 
         function getAll() {
-            return $http.get(serverUrl + 'api/isps/')
+            return $http.get(serverUrl + '/api/isps/')
               .then(getIspsComplete)
               .catch(getIspsFailed);
 
@@ -41,11 +41,18 @@
         }
 
         function postIsp (isp) {
-          $http.post(serverUrl + 'api/isps/', isp, {
-              headers : {
-                'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-              }
-            })
+          $http({
+              method: 'POST',
+              url: serverUrl + '/api/isps/',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              transformRequest: function(obj) {
+                  var str = [];
+                  for(var p in obj)
+                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                  return str.join("&");
+              },
+              data: isp
+          })
            .then(postIspComplete)
            .catch(postIspFailed);
 

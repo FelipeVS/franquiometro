@@ -1,14 +1,16 @@
-var env = process.env.NODE_ENV || 'development';
+var environment = process.env.NODE_ENV || 'development';
+var user = process.env.DB_USER;
+var password = process.env.DB_PWD;
 
 var config = {
   port: normalizePort(process.env.PORT || '3000')
 };
 
-if (env === "production") {
-  config.databaseUrl = 'mongodb://admin:user-admin@ds021741.mlab.com:21741/franquiometro';
-} else if (env === "development") {
+if (environment === "production") {
+  config.databaseUrl = 'mongodb://' + user + ':' + password + '@ds021741.mlab.com:21741/franquiometro';
+} else if (environment === "development") {
   config.databaseUrl = 'mongodb://localhost:27017/franquiometro';
-} else if (env === "test") {
+} else if (environment === "test") {
   config.databaseUrl = 'mongodb://localhost:27017/franquiometro-test';
 }
 

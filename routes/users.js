@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var isps = require('../models/users');
+var users = require('../models/users');
 
 // find all songs route
 router.get('/', function(req, res, next) {
-  isps.find({}, function(err, data) {
+  users.find({}, function(err, data) {
 		if (err) {
 			res.sendStatus(500);
 		} else {
@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 });
 router.get('/:id', function(req, res, next) {
   var query = { _id: req.params.id };
-	isps.findOne(query, function(err, data) {
+	users.findOne(query, function(err, data) {
 		if (err || data == null) {
 			res.sendStatus(404);
 		} else {
@@ -23,13 +23,13 @@ router.get('/:id', function(req, res, next) {
 	});
 });
 router.post('/', function(req, res, next) {
-  var isp = new Client(req.body);
-	isp.save(function(err, data) {
-		console.log(data);
+  var user = new users(req.body);
+	user.save(function(err, user) {
+		console.log(user);
 		if (err) {
 			res.status(400).json(err);
 		} else {
-			res.status(201).json(data);
+			res.status(201).json(user);
 		}
 	});
 });
@@ -38,7 +38,7 @@ router.put('/:id', function(req, res, next) {
 	var mod = req.body;
 	delete mod._id;
 
-	isps.update(query, mod, function(err, data) {
+	users.update(query, mod, function(err, data) {
 		if (err) {
 			res.status(400).json(err);
 		} else {
@@ -49,7 +49,7 @@ router.put('/:id', function(req, res, next) {
 router.delete('/:id', function(req, res, next) {
   var query = { _id: req.params.id };
 
-	isps.remove(query, function(err, data) {
+	users.remove(query, function(err, data) {
 		if (err) {
 			res.status(400).json(err);
 		} else {

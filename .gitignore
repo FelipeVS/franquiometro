@@ -49,3 +49,6 @@ Temporary Items
 
 node_modules/
 bower_components/
+
+# local variables
+.env

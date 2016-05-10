@@ -1,3 +1,5 @@
+require('dotenv').config(); //gets local variables
+
 var express   = require('express');
 var mongoose  = require('mongoose');
 var fs        = require('fs');
@@ -7,6 +9,7 @@ var root      = __dirname;
 var path = require('path');
 var app       = express();
 var server    = null;
+
 
 // This setups the database
 require('./config/db')(config);
@@ -40,9 +43,12 @@ app.use('/api/users', api.users);
 
 app.use('/', express.static(path.join(root, '/public')));
 
+app.use('/oops/', express.static(path.join(root, '/public/error')));
+
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
+  res.redirect('/oops/')
   res.send('Nada aqui!')
   next(err);
 });

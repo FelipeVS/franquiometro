@@ -9,21 +9,21 @@
 
     function runBlock(IspsService) {
 
-        // var isp = {
-        //   "name": "GVT",
-        //   "plans": [
-        //     {
-        //       "download": {
-        //         "speed": 35,
-        //         "unit": "Mbps"
-        //       },
-        //       "upload": {
-        //         "speed": 3,
-        //         "unit": "Mbps"
-        //       }
-        //     }
-        //   ]
-        // };
+        var isp = {
+          "name": "GVT",
+          "plans": [
+            {
+              "download": {
+                "speed": 35,
+                "unit": "Mbps"
+              },
+              "upload": {
+                "speed": 3,
+                "unit": "Mbps"
+              }
+            }
+          ]
+        };
 
         activate();
 
