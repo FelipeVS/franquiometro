@@ -4,7 +4,103 @@
 
 <div class="text">
   <h1> Consumo</h1>
-  <p> O que você consome diariamente </p>
-  <p> Please check the url or go to <a href="#">main page</a> and see if you can locate what you are looking for</p>
-</div>
+  <p> Vamos entender o seu perfil de uso da rede </p>
+
+  <hr>
+
+  <div class="container">
+
+    <div class="form-group row">
+      <div class="col-xs-12	col-sm-12	col-md-12	col-lg-12">
+        <label> Quantas pessoas compartilham essa conexão? </label>
+        <input class="form-control" ng-model="vm.profile.numberOfusers" placeholder="x pessoas" ng-required="required" type="number">
+      </div>
+      <div class="row">
+        <div class="col-xs-6	col-sm-12	col-md-12	col-lg-6">
+          <label ng-class="{'disabled': vm.media.cancel}">  <i class="fa fa-play"></i>  Usa Youtube, Neflix, vímeo, etc? <i class="fa fa-plus" ng-if="vm.media.hidden" ng-click="vm.media.hidden=false"></i> </label>
+        </div>
+        <div class="col-xs-6 col-sm-12 col-md-6 col-lg-12">
+          <button type="button" class="btn btn-success"  ng-click="vm.newModal('media');vm.profile.media.enabled=true">
+            Sim
+          </button>
+          <button type="button" class="btn btn-danger"  ng-click="vm.cancelMedia()">
+            Não
+          </button>
+        </div>
+      </div>
+      <div>
+        <div ng-if="vm.profile.media.short" ng-if="vm.profile.media.enabled" ng-hide="vm.media.hidden">
+          <div class="media">
+            <div class="media-left">
+              <a href="#">
+                <i class="fa fa-play"></i>
+              </a>
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading">
+                {{ vm.profile.media.short }}
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12	col-sm-12	col-md-12	col-lg-12" ng-if="!vm.profile.media.enabled">
+        <label> Não consome mídias </label>
+      </div>
+        <!--
+        <div class="form-group row">
+
+          <hr>
+
+          <label>  <i class="fa fa-gamepad"></i>  Joga no pc, console, tablet, etc? </label>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <button type="button" class="btn btn-success"  ng-click="vm.newModal('games')">
+              Sim
+            </button>
+            <button type="button" class="btn btn-danger"  ng-click="vm.cancelGames()">
+              Não
+            </button>
+          </div>
+
+          <hr>
+
+          <label>  <i class="fa fa-cloud"></i>  Usa serviços de backup de dados na nuvem (Dropbox, Google Drive, OneDrive, etc)? </label>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <button type="button" class="btn btn-success"  ng-click="vm.newModal('cloud')">
+              Sim
+            </button>
+            <button type="button" class="btn btn-danger"  ng-click="vm.cancelCloud()">
+              Não
+            </button>
+          </div>
+
+        </div>
+
+        <div class="btn-group" ng-if="vm.profile.media.enabled">
+          <label class="btn btn-default" ng-model="vm.profile.media.youtube.enabled" uib-btn-checkbox>
+            <i class="fa fa-youtube"></i> Youtube
+          </label>
+          <br>
+          <hr>
+          <label class="btn btn-default" ng-model="vm.profile.media.neflix.enabled" uib-btn-checkbox>
+            <i class="fa fa-film"></i> Netflix
+          </label>
+          <br>
+          <hr>
+          <label class="btn btn-default" ng-model="vm.profile.games.steam.enabled" uib-btn-checkbox>
+            <i class="fa fa-gamepad"></i> Steam
+          </label>
+          <br>
+          <hr>
+          <label class="btn btn-default" ng-model="vm.profile.clouds.enabled" uib-btn-checkbox>
+            <i class="fa fa-cloud"></i> Nuvem
+          </label>
+        </div> -->
+
+
+      </div>
+    </div>
+
+  </div>
+
 </div>

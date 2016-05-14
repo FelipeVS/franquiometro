@@ -10,17 +10,34 @@
     /* @ngInject */
     function MainController($rootScope, $timeout, $uibModal, ipService, IspsService) {
         var vm = this;
-        vm.appStep = 0;
-        vm.startCalc = startCalc;
-        vm.prevStep = prevStep;
-        vm.nextStep = nextStep;
-        vm.share = share;
-        vm.newIspModal = newIspModal;
-        vm.speeds = [1,2,3,5,8,10,15,20,25,35,50,100,1000];
-        vm.speedUnits = [ 'Kbps', 'Mbps', 'Gbps']
+        vm.appStep = 2; // screen number starts at 0
+        vm.speeds = [1,2,3,5,8,10,15,20,25,35,50,100];
+        vm.speedUnits = [ 'Kbps', 'Mbps', 'Gbps'];
+
+        vm.media = {
+          "cancel": false,
+          "hidden": false
+        }
+
+        vm.startCalc = startCalc; // start button
+        vm.prevStep = prevStep; // prev screen
+        vm.nextStep = nextStep; // next screen
+        vm.share = share; // share the results in twitter, facebook, etc
+        // create new isp in db
+        vm.newModal = newModal;
         vm.postIsp = postIsp;
+
         vm.ispSelection = ispSelection;
         vm.firstStepCompleted = firstStepCompleted;
+
+        vm.cancelMedia = cancelMedia;
+
+        vm.profile = {
+          "media" : {
+            "enabled": false,
+            "short": "Consumo médio"
+          }
+        }
 
         activate();
 
@@ -74,11 +91,14 @@
           console.log('This will open a modal to post on facebook, twitter, whatever.')
         }
 
-        function newIspModal() {
+        function newModal(name) {
+          function capitalizeFirstLetter(string) {
+              return string.charAt(0).toUpperCase() + string.slice(1);
+          }
           var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: 'app/layout/modal/newIsp.html',
-            // controller: 'ModalInstanceCtrl',
+            templateUrl: 'app/layout/modal/' + name + '/index.html',
+            controller: capitalizeFirstLetter(name) + 'Controller',
             size: 'lg'
           });
         }
@@ -120,6 +140,10 @@
         function addPlan(plan) {
           // TODO
           IspsService.postIsp(isp)
+        }
+
+        function cancelMedia() {
+          vm.profile.media.enabled = false;
         }
     }
 })();
