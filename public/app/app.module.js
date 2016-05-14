@@ -12,7 +12,7 @@
         'app.services'
     ]);
     angular
-    .module('app.services', [
-      'app.core'
-    ]);
+        .module('app.services', [
+            'app.core'
+        ]);
 })();

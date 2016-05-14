@@ -1,1 +1,67 @@
-<h2> Consumo de mídias digitais </h2>
+<div class="container">
+  <div class="text-center">
+    <h4> Seu perfil de consumo de mídias </h4>
+  </div>
+  <hr>
+
+  <div class="content">
+    <div class="row">
+      <div class="col-xs-12	col-sm-12	col-md-12	col-lg-12">
+        <label><h4>
+          O que você usa?
+        </h4></label>
+        <br>
+        <div class="row">
+          <div class="col-xs-12	col-sm-12	col-md-6	col-lg-6">
+            <label class="btn btn-default" ng-model="vm.profile.media.apps.youtube.enabled" uib-btn-checkbox ng-change="vm.updateProfile()" ng-if="!vm.profile.media.apps.youtube.enabled">
+              Youtube
+            </label>
+          </div>
+          <form class="col-xs-12	col-sm-12 col-md-6 col-lg-6" ng-if="vm.profile.media.apps.youtube.enabled">
+           <fieldset>
+            <legend><h4>
+              Youtube
+            </h4></legend>
+            <div>
+              <label><h4>
+                Quantos vídeos aproximadamente por dia?
+              </h4></label>
+              <input class="form-control" ng-model="vm.profile.media.apps.youtube.videosPerDay" placeholder="x vídeos" ng-required="required" type="number">
+            </div>
+            <div>
+              <label><h4>
+                Quantos vídeos aproximadamente por dia?
+              </h4></label>
+              <input class="form-control" ng-model="vm.profile.media.apps.youtube.videosPerDay" placeholder="x vídeos" ng-required="required" type="number">
+            </div>
+            <div>
+              <label><h4>
+                Quantos vídeos aproximadamente por dia?
+              </h4></label>
+              <input class="form-control" ng-model="vm.profile.media.apps.youtube.videosPerDay" placeholder="x vídeos" ng-required="required" type="number">
+            </div>
+           </fieldset>
+          </form>
+
+        </div>
+
+        <label class="btn btn-default" ng-model="vm.profile.media.apps.netflix.enabled" uib-btn-checkbox ng-change="vm.updateProfile()">
+          Netflix
+        </label>
+        <label class="btn btn-default" ng-model="vm.profile.media.apps.vimeo.enabled" uib-btn-checkbox ng-change="vm.updateProfile()">
+          Vímeo
+        </label>
+        <label class="btn btn-default" ng-model="vm.profile.media.apps.facebook.enabled" uib-btn-checkbox ng-change="vm.updateProfile()">
+          Vídeos no Facebook
+        </label>
+        <label class="btn btn-default" ng-model="vm.profile.media.apps.instagram.enabled" uib-btn-checkbox ng-change="vm.updateProfile()">
+          Instagram
+        </label>
+
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <h4> {{ vm.profile.media}}</h4>
+</div>

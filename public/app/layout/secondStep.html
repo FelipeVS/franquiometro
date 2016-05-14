@@ -1,59 +1,106 @@
-<div class="image">
-  <img src="images/smile.png">
-</div>
-
-<div class="text">
+<div class="content">
   <h1> Consumo</h1>
   <p> Vamos entender o seu perfil de uso da rede </p>
 
   <hr>
 
-  <div class="container">
-
+  <div class="container-fluid">
     <div class="form-group row">
-      <div class="col-xs-12	col-sm-12	col-md-12	col-lg-12">
-        <label> Quantas pessoas compartilham essa conexão? </label>
-        <input class="form-control" ng-model="vm.profile.numberOfusers" placeholder="x pessoas" ng-required="required" type="number">
-      </div>
-      <div class="row">
-        <div class="col-xs-6	col-sm-12	col-md-12	col-lg-6">
-          <label ng-class="{'disabled': vm.media.cancel}">  <i class="fa fa-play"></i>  Usa Youtube, Neflix, vímeo, etc? <i class="fa fa-plus" ng-if="vm.media.hidden" ng-click="vm.media.hidden=false"></i> </label>
+      <div class="container-fluid">
+
+        <div class="row" ng-if="!vm.profile.media.answered && !vm.profile.media.enabled">
+          <div class="col-xs-12	col-sm-12	col-md-12	col-lg-12">
+            <label><h4>
+              Quantas pessoas compartilham essa conexão?
+            </h4></label>
+            <input class="form-control" ng-model="vm.profile.numberOfusers" placeholder="x pessoas" ng-required="required" type="number">
+          </div>
         </div>
-        <div class="col-xs-6 col-sm-12 col-md-6 col-lg-12">
-          <button type="button" class="btn btn-success"  ng-click="vm.newModal('media');vm.profile.media.enabled=true">
-            Sim
-          </button>
-          <button type="button" class="btn btn-danger"  ng-click="vm.cancelMedia()">
-            Não
-          </button>
+
+        <div class="row" ng-if="!vm.profile.media.answered && !vm.profile.media.enabled">
+          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
+            <label><h4>
+              <i class="fa fa-play"></i>
+              Usa Youtube, Neflix, vímeo, etc?
+            </h4></label>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6 text-center" ng-if="!vm.profile.media.answered">
+            <button type="button" class="btn btn-success"  ng-click="vm.newModal('media');">
+              Sim
+            </button>
+            <button type="button" class="btn btn-danger"  ng-click="vm.cancelModal('media')">
+              Não
+            </button>
+          </div>
         </div>
-      </div>
-      <div>
-        <div ng-if="vm.profile.media.short" ng-if="vm.profile.media.enabled" ng-hide="vm.media.hidden">
-          <div class="media">
-            <div class="media-left">
-              <a href="#">
-                <i class="fa fa-play"></i>
-              </a>
-            </div>
-            <div class="media-body">
-              <h4 class="media-heading">
-                {{ vm.profile.media.short }}
-              </h4>
-            </div>
+
+        <div class="row" ng-if="vm.profile.media.answered && vm.profile.media.enabled">
+          <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" ng-click="vm.newModal('media')">
+            <label><h4>
+              <i class="fa fa-play"></i>
+              {{ vm.profile.media.short }}
+            </h4></label>
+          </div>
+        </div>
+
+        <div class="row" ng-if="vm.profile.media.answered && !vm.profile.media.enabled">
+          <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" ng-click="vm.newModal('media')">
+            <label><h4>
+              <i class="fa fa-play"></i>
+              Não consome mídias
+            </h4></label>
+          </div>
+        </div>
+
+        <hr> <!---------------------------------------->
+
+        <div class="row" ng-if="!vm.profile.games.answered && !vm.profile.games.enabled">
+          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
+            <label><h4>
+              <i class="fa fa-gamepad"></i>
+              Usa Steam, PSN, Xbox Live, etc?
+            </h4></label>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6 text-center" ng-if="!vm.profile.games.answered">
+            <button type="button" class="btn btn-success"  ng-click="vm.newModal('games');">
+              Sim
+            </button>
+            <button type="button" class="btn btn-danger"  ng-click="vm.cancelModal('games')">
+              Não
+            </button>
+          </div>
+        </div>
+
+        <div class="row" ng-if="vm.profile.games.answered && vm.profile.games.enabled">
+          <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" ng-click="vm.newModal('games')">
+            <label><h4>
+              <i class="fa fa-gamepad"></i>
+              {{ vm.profile.games.short }}
+            </h4></label>
+          </div>
+        </div>
+
+        <div class="row" ng-if="vm.profile.games.answered && !vm.profile.games.enabled">
+          <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" ng-click="vm.newModal('games')">
+            <label><h4>
+              <i class="fa fa-gamepad"></i>
+              Não uso a internet para baixar jogos ou jogar online
+            </h4></label>
           </div>
         </div>
       </div>
-      <div class="col-xs-12	col-sm-12	col-md-12	col-lg-12" ng-if="!vm.profile.media.enabled">
-        <label> Não consome mídias </label>
+
       </div>
+
         <!--
         <div class="form-group row">
 
           <hr>
 
           <label>  <i class="fa fa-gamepad"></i>  Joga no pc, console, tablet, etc? </label>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="col-xs-6 col-sm-12 col-md-12 col-lg-12">
             <button type="button" class="btn btn-success"  ng-click="vm.newModal('games')">
               Sim
             </button>
@@ -65,7 +112,7 @@
           <hr>
 
           <label>  <i class="fa fa-cloud"></i>  Usa serviços de backup de dados na nuvem (Dropbox, Google Drive, OneDrive, etc)? </label>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="col-xs-6 col-sm-12 col-md-12 col-lg-12">
             <button type="button" class="btn btn-success"  ng-click="vm.newModal('cloud')">
               Sim
             </button>
@@ -99,8 +146,18 @@
 
 
       </div>
+
+      <hr>
+
+      <div class="text-center">
+        <button type="button" class="btn btn-default"  ng-click="vm.prevStep()">
+          Voltar
+        </button>
+
+        <button type="button" class="btn btn-default" ng-if="vm.secondStepCompleted()" ng-click="vm.nextStep()">
+          Próximo
+        </button>
+      </div>
     </div>
-
   </div>
-
 </div>

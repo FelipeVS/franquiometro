@@ -2,26 +2,29 @@
     'use strict';
 
     angular
-    .module('app.factory')
-    .factory('ProfileFactory', ProfileFactory);
+        .module('app.services')
+        .factory('ProfileFactory', ProfileFactory);
 
     ProfileFactory.$inject = [];
 
-    var isps = [];
-
     /* @ngInject */
-    function ispsService() {
+    function ProfileFactory() {
         var service = {
-            getAll: getAll,
-            postIsp: postIsp,
-            getIsp: getIsp
+            getModel: getModel,
+            saveModel: saveModel
         };
-        var isp;
 
-        return factory;
+        var profile = {};
 
-        ////////////////
+        return service;
 
-        
+        function getModel() {
+          console.log('sending profile:\ ', profile)
+          return profile;
+        }
+
+        function saveModel(data) {
+          profile = data;
+        }
     }
 })();

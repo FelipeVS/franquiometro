@@ -5,11 +5,12 @@
     .module('app.main')
     .controller('MediaController', MediaController);
 
-    MediaController.$inject = [];
+    MediaController.$inject = ['ProfileFactory'];
 
     /* @ngInject */
-    function MediaController() {
+    function MediaController(ProfileFactory) {
         var vm = this;
+        vm.updateProfile = updateProfile;
 
         activate();
 
@@ -17,7 +18,13 @@
 
         function activate() {
             console.log('Media started')
+            vm.profile = ProfileFactory.getModel();
+        }
 
+        function updateProfile() {
+          console.log(vm.profile);
+          ProfileFactory.saveModel(vm.profile);
+          vm.profile = ProfileFactory.getModel();
         }
 
     }

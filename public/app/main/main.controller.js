@@ -5,19 +5,14 @@
     .module('app.main')
     .controller('MainController', MainController);
 
-    MainController.$inject = ['$rootScope', '$timeout', '$uibModal', 'ipService', 'IspsService'];
+    MainController.$inject = ['$rootScope', '$timeout', '$uibModal', 'ipService', 'IspsService', 'ProfileFactory'];
 
     /* @ngInject */
-    function MainController($rootScope, $timeout, $uibModal, ipService, IspsService) {
+    function MainController($rootScope, $timeout, $uibModal, ipService, IspsService, ProfileFactory) {
         var vm = this;
-        vm.appStep = 2; // screen number starts at 0
+        vm.appStep = 0; // screen number starts at 0
         vm.speeds = [1,2,3,5,8,10,15,20,25,35,50,100];
         vm.speedUnits = [ 'Kbps', 'Mbps', 'Gbps'];
-
-        vm.media = {
-          "cancel": false,
-          "hidden": false
-        }
 
         vm.startCalc = startCalc; // start button
         vm.prevStep = prevStep; // prev screen
@@ -29,13 +24,22 @@
 
         vm.ispSelection = ispSelection;
         vm.firstStepCompleted = firstStepCompleted;
+        vm.secondStepCompleted = secondStepCompleted;
 
-        vm.cancelMedia = cancelMedia;
+        vm.cancelModal = cancelModal;
 
         vm.profile = {
           "media" : {
+            "aswered": false,
             "enabled": false,
-            "short": "Consumo médio"
+          },
+          "games" : {
+            "aswered": false,
+            "enabled": false,
+          },
+          "cloud" : {
+            "aswered": false,
+            "enabled": false,
           }
         }
 
@@ -92,15 +96,36 @@
         }
 
         function newModal(name) {
+          console.log(vm.profile[name])
+          vm.profile[name].answered = true;
+          vm.profile[name].enabled = true;
+          ProfileFactory.saveModel(vm.profile);
+
           function capitalizeFirstLetter(string) {
               return string.charAt(0).toUpperCase() + string.slice(1);
           }
           var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'app/layout/modal/' + name + '/index.html',
-            controller: capitalizeFirstLetter(name) + 'Controller',
+            controller: capitalizeFirstLetter(name) + 'Controller as vm',
             size: 'lg'
           });
+
+          console.log(capitalizeFirstLetter(name) + 'Controller');
+        }
+
+        function cancelModal(name) {
+          console.log(vm.profile[name])
+          vm.profile[name].answered = true;
+          vm.profile[name].enabled = false;
+        }
+
+        function saveModel(data) {
+          ProfileFactory.saveModel(vm.profile);
+        }
+
+        function getModel() {
+          vm.profile = ProfileFactory.getModel();
         }
 
         function ispSelection(type) {
@@ -124,8 +149,16 @@
               if (vm.userIsp.plan.download.value && vm.userIsp.plan.upload.value) {
                 return true;
               }
-            } else {
-              return false;
+            }
+          } else {
+            return false;
+          }
+        }
+
+        function secondStepCompleted() {
+          if (vm.profile) {
+            if (vm.profile.media.answered || vm.profile.games.answered) {
+              return true;
             }
           } else {
             return false;
@@ -142,8 +175,5 @@
           IspsService.postIsp(isp)
         }
 
-        function cancelMedia() {
-          vm.profile.media.enabled = false;
-        }
     }
 })();
