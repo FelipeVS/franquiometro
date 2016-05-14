@@ -7,7 +7,7 @@
   },
   "scripts": {
     "build": "gulp build",
-    "start": "gulp build && node app.js",
+    "start": "node app.js",
     "serve": "gulp serve",
     "postinstall": "bower install"
   },
