@@ -6,8 +6,9 @@
     "node": "4.4.3"
   },
   "scripts": {
-    "start": "node app.js",
-    "watch": "gulp watch",
+    "build": "gulp build",
+    "start": "gulp build && node app.js",
+    "serve": "gulp serve",
     "postinstall": "bower install"
   },
   "dependencies": {
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-exec": "2.1.2",
     "gulp-ng-constant": "1.1.0",
     "gulp-sass": "2.3.1"
   }
