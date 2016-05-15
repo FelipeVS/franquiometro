@@ -11,10 +11,13 @@
 
     /* @ngInject */
     function ispsService($http, $q, serverUrl) {
+        var ispsUrl = serverUrl + '/api/isps'
         var service = {
             getAll: getAll,
             postIsp: postIsp,
-            getIsp: getIsp
+            getIsp: getIsp,
+            updateIsp: updateIsp,
+            deleteIsp: deleteIsp
         };
         var isp;
 
@@ -23,51 +26,64 @@
         ////////////////
 
         function getAll() {
-            return $http.get(serverUrl + '/api/isps/')
+            return $http.get(ispsUrl)
               .then(getIspsComplete)
               .catch(getIspsFailed);
-
-            function getIspsComplete(response) {
-                isps = response.data;
-                if (isps === 0 ) {
-                  console.log('No isp')
-                }
-                return isps;
-            }
-
-            function getIspsFailed(data) {
-              console.log("GET ERROR!\nData: ", data.data, "\nStatus: ", data.status, "\nHeaders: ", data.header, "\nConfig: ", data.config)
-            }
         }
 
         function postIsp (isp) {
           $http({
               method: 'POST',
-              url: serverUrl + '/api/isps/',
-              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-              transformRequest: function(obj) {
-                  var str = [];
-                  for(var p in obj)
-                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                  return str.join("&");
-              },
+              url: ispsUrl,
               data: isp
           })
            .then(postIspComplete)
            .catch(postIspFailed);
-
-           function postIspComplete(response) {
-              console.log("POST successful!", response)
-           }
-           function postIspFailed(data) {
-              console.log("POST ERROR!\nData: ", data.data, "\nStatus: ", data.status, "\nHeaders: ", data.header, "\nConfig: ", data.config)
-           }
-
         }
 
         function getIsp () {
             return isp;
         }
 
+        function updateIsp(isp) {
+          console.log('Updating ' + isp.name)
+
+          $http.put(ispsUrl, isp, {params: {name: isp.name}})
+         .then(postIspComplete)
+         .catch(postIspFailed);
+        }
+
+        function deleteIsp(isp) {
+          $http.delete(ispsUrl, {params: {name: isp.name}})
+          .then(deleteIspComplete)
+          .catch(deleteIspFailed);
+        }
+
+        //private functions
+
+        function getIspsComplete(response) {
+            isps = response.data;
+            if (isps === 0 ) {
+              console.log('No isp')
+            }
+            return isps;
+        }
+        function getIspsFailed(data) {
+          console.log("GET ERROR!\nData: ", data.data, "\nStatus: ", data.status, "\nHeaders: ", data.header, "\nConfig: ", data.config)
+        }
+
+        function postIspComplete(response) {
+           console.log("POST successful!", response)
+        }
+        function postIspFailed(data) {
+           console.log("POST ERROR!\nData: ", data.data, "\nStatus: ", data.status, "\nHeaders: ", data.header, "\nConfig: ", data.config)
+        }
+
+        function deleteIspComplete(response) {
+           console.log("DELETE successful!", response)
+        }
+        function deleteIspFailed(data) {
+           console.log("DELETE ERROR!\nData: ", data.data, "\nStatus: ", data.status, "\nHeaders: ", data.header, "\nConfig: ", data.config)
+        }
     }
 })();

@@ -3,14 +3,14 @@
 
     angular
     .module('app.services')
-    .factory('ipService', ipService);
+    .factory('IpService', IpService);
 
-    ipService.$inject = ['$http', '$q'];
+    IpService.$inject = ['$http', '$q'];
 
     var centers = [];
 
     /* @ngInject */
-    function ipService($http, $q) {
+    function IpService($http, $q) {
         var service = {
             get: getUserIP
         };

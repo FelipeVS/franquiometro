@@ -45,13 +45,10 @@ app.use('/', express.static(path.join(root, '/public')));
 
 app.use('/oops/', express.static(path.join(root, '/public/error')));
 
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  res.redirect('/oops/')
-  res.send('Nada aqui!')
-  next(err);
-});
+// app.use(function(req, res, next) {
+//   res.status = 404;
+//   res.redirect('/oops/')
+// });
 
 var server = http.createServer(app);
 server.listen(config.port);

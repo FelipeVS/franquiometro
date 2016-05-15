@@ -3,7 +3,8 @@ var router = express.Router();
 var isps = require('../models/isps');
 
 router.get('/', function(req, res, next) {
-  isps.find({}, function(err, data) {
+  params = req.query || {}
+  isps.find(params, function(err, data) {
 		if (err) {
 			res.sendStatus(500);
 		} else {
@@ -12,30 +13,17 @@ router.get('/', function(req, res, next) {
 		}
 	});
 });
-router.get('/:id', function(req, res, next) {
-	isps.findById(req.params.id, function(err, data) {
-		if (err || data == null) {
-			res.sendStatus(404);
-		} else {
-      console.log( 'By ID:', data);
-			res.json(data);
-		}
-	});
-});
-router.get('/:name', function(req, res, next) {
-  console.log(req.params.name)
-  var query = { 'name': req.params.name };
-	isps.find(query, function(err, data) {
-		if (err || data == null) {
-			res.sendStatus(404);
-		} else {
-      console.log( query + ':', data);
-			res.json(data);
-		}
-	});
-});
+// router.get('/:id', function(req, res, next) {
+// 	isps.findById(req.params.id, function(err, data) {
+// 		if (err || data == null) {
+// 			res.sendStatus(404);
+// 		} else {
+//       console.log( 'By ID:', data);
+// 			res.json(data);
+// 		}
+// 	});
+// });
 router.post('/', function(req, res, next) {
-  console.log(req.body.name, req.body.plans);
   var isp = new isps(req.body);
 	isp.save(function(err, isp) {
 		console.log('Post data:', isp);
@@ -46,22 +34,36 @@ router.post('/', function(req, res, next) {
 		}
 	});
 });
-router.put('/isps/:id', function(req, res, next) {
-  var query = { _id: req.params.id };
-	var mod = req.body;
-	delete mod._id;
+router.put('/', function(req, res, next) {
+  var content = new isps(req.body);
+  delete content["_id"]
+  var query = { name: req.query };
 
-	isps.update(query, mod, function(err, data) {
-		if (err) {
-			res.status(400).json(err);
-		} else {
-			res.json(data);
-		}
-	});
+  console.log(JSON.stringify(req.params, req.query));
+  console.log('UPDATE', content, query);
+
+  isps.findOne(query, function (err, isps) {
+    console.log(isps);
+    if (isps) {
+      isps.name = content.name;
+      isps.plans.push(content.plans) // CRIAR FUNÇÂO PARA VERIFICAR SE JÀ EXISTE PLANO
+      isps.save(function (err) {
+        if (err) {
+    			res.status(400).json(err);
+    		} else {
+    			res.status(201).json(isps);
+    		}
+      });
+    } else {
+      res.status(400).json(err);
+    }
+
+  });
+
 });
-router.delete('/:id', function(req, res, next) {
-  var query = { _id: req.params.id };
 
+router.delete('/', function(req, res, next) {
+  var query = { name: req.query.name };
 	isps.remove(query, function(err, data) {
 		if (err) {
 			res.status(400).json(err);

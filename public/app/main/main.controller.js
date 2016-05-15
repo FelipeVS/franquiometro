@@ -5,10 +5,16 @@
     .module('app.main')
     .controller('MainController', MainController);
 
-    MainController.$inject = ['$rootScope', '$timeout', '$uibModal', 'ipService', 'IspsService', 'ProfileFactory'];
+    MainController.$inject = ['$rootScope', '$scope', '$timeout', '$uibModal', 'IpService', 'IspsService', 'ProfileFactory', 'ProgressBarService'];
 
     /* @ngInject */
-    function MainController($rootScope, $timeout, $uibModal, ipService, IspsService, ProfileFactory) {
+    function MainController($rootScope, $scope, $timeout, $uibModal, IpService, IspsService, ProfileFactory, ProgressBarService) {
+
+        // private variables
+        var workSteps = 2; // number of steps inside the page (api calls, calculations, etc). At startup, 2 steps are automatic triggered (can changed upon each new function)
+        var currentWorkStep = 0; // starts at zero and is incremented inside the funcion on each new call
+
+        // public
         var vm = this;
         vm.appStep = 0; // screen number starts at 0
         vm.speeds = [1,2,3,5,8,10,15,20,25,35,50,100];
@@ -22,7 +28,6 @@
         vm.newModal = newModal;
         vm.postIsp = postIsp;
 
-        vm.ispSelection = ispSelection;
         vm.firstStepCompleted = firstStepCompleted;
         vm.secondStepCompleted = secondStepCompleted;
 
@@ -48,25 +53,29 @@
         ////////////////
 
         function activate() {
+            ProgressBarService.set(0)
             console.log('Home started')
+
             // Get user's ip
-            ipService.get().then(function(response) {
+            IpService.get().then(function(response) {
               $rootScope.userIP = response
               vm.userIsp = {
                 "name": response.isp,
                 "plan": {
                   "download": {
-                    "unit": ""
+                    "unit": vm.speedUnits[1]
                   },
                   "upload": {
-                    "unit": ""
+                    "unit": vm.speedUnits[1]
                   }
                 }
               };
+              incrementProgressBar();
             });
             IspsService.getAll().then(function(response) {
                 vm.isps = response
                 console.log(vm.isps);
+                incrementProgressBar();
             });
         }
 
@@ -82,6 +91,9 @@
         function nextStep() {
           vm.appStep += 1;
           openTooltips();
+          if (vm.firstStepCompleted()) {
+            vm.postIsp(vm.userIsp);
+          }
         }
 
         function openTooltips() {
@@ -128,25 +140,10 @@
           vm.profile = ProfileFactory.getModel();
         }
 
-        function ispSelection(type) {
-          switch (type) {
-            case 'name':
-
-              break;
-            case 'download':
-              vm.userIsp.plan.download.unit = vm.speedUnits[1];
-              break;
-            case 'upload':
-              vm.userIsp.plan.upload.unit = vm.speedUnits[1];
-              break;
-            default:
-          }
-        }
-
         function firstStepCompleted() {
           if (vm.userIsp){
             if (vm.userIsp.name && vm.userIsp.plan ) {
-              if (vm.userIsp.plan.download.value && vm.userIsp.plan.upload.value) {
+              if (vm.userIsp.plan.download.speed && vm.userIsp.plan.upload.speed) {
                 return true;
               }
             }
@@ -167,13 +164,26 @@
 
         // create or update an isp on the database
         function postIsp(isp) {
-          IspsService.postIsp(isp)
+          var instance = {
+            "name" : isp.name,
+            "plans" : [isp.plan]
+          }
+          IspsService.updateIsp(instance)
         }
 
         function addPlan(plan) {
           // TODO
           IspsService.postIsp(isp)
         }
+
+        //private functions
+
+        function incrementProgressBar() {
+          currentWorkStep += 1;
+          var progressRatio = (currentWorkStep / workSteps) * 100;
+          ProgressBarService.set(progressRatio)
+        }
+
 
     }
 })();
