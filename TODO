@@ -1,0 +1,14 @@
+===:server
+-finalizar api REST (problemas com o update, falta delete);
+-modelo e rotas pra usuário (armazenamento de informações pessoais e perfil de uso)
+-melhorar gulpfile (build, watch, etc)
+
+===:public
+-criar serviço pra consulta da cidade/estado
+-terminar todo o modal de mídia, definindo o metódo de interação e coleta de informação
+-mvc de cada modal com base no de cima
+-conexão com redes sociais para compartilhamento
+-melhorar layout (imagens, cores, animações) e pensar em ads.
+-implementar google analytics
+-criar side menus (esquerdo= resumo da interação, direito = mapa?)
+-usar dados pra gerar mapa de conexão

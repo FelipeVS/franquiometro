@@ -1,0 +1,41 @@
+<div class="row" ng-if="!vm.enabled" ng-click="vm.newModal()">
+  <div class="col-xs-10 col-lg-10 col-md-10 col-sm-10">
+    <label><h4>
+      <i class="fa {{vm.gicon}}"></i>
+      {{ vm.gtitle }}
+    </h4></label>
+  </div>
+  <div class="col-xs-2 col-lg-2 col-md-2 col-sm-2">
+    <h4>
+      <i class="fa fa-plus"></i>
+    </h4>
+  </div>
+</div>
+
+<div class="row" ng-if="vm.enabled">
+  <div ng-class="{'col-xs-8 col-lg-8 col-md-8 col-sm-8': vm.disabling, 'col-xs-10 col-lg-10 col-md-10 col-sm-10': !vm.disabling}" ng-click="vm.newModal()">
+    <label ng-if="!vm.disabling"><h4>
+      <i class="fa {{vm.gicon}}"></i>
+      Ver perfil de consumo
+    </h4></label>
+    <label ng-if="vm.disabling"><h4>
+      <i class="fa {{vm.gicon}}"></i>
+      Tem certeza?
+    </h4></label>
+  </div>
+  <div class="col-xs-2 col-lg-2 col-md-2 col-sm-2" ng-if="vm.disabling" ng-click="vm.enabled=false" ng-if="!vm.disabling">
+    <h4 class="text-success">
+      <i class="fa fa-check"></i>
+    </h4>
+  </div>
+  <div class="col-xs-2 col-lg-2 col-md-2 col-sm-2" ng-click="vm.disabling=!vm.disabling" ng-if="!vm.disabling">
+    <h4>
+      <i class="fa fa-times-circle"></i>
+    </h4>
+  </div>
+  <div class="col-xs-2 col-lg-2 col-md-2 col-sm-2" ng-click="vm.disabling=!vm.disabling" ng-if="vm.disabling">
+    <h4 class="text-danger">
+      <i class="fa fa-times"></i>
+    </h4>
+  </div>
+</div>

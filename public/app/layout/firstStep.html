@@ -9,42 +9,67 @@
   <hr>
 
   <div class="container">
-    <div class="form-group row">
-      <div class="col-xs-12	col-sm-12	col-md-12	col-lg-12">
-        <label>
-          Diga o nome do seu provedor
-        </label>
-        <input class="form-control" type="text" ng-required="required" ng-model="vm.userIsp.name" placeholder="Nome do provedor" uib-typeahead="isp.name for isp in vm.isps | filter:$viewValue | limitTo:5">
-      </div>
-    </div>
+    <form name="IspForm">
+      <div class="form-group row">
+        <div class="col-xs-12	col-sm-12	col-md-12	col-lg-12">
+          <label ng-class="{ 'has-error': IspForm.ispName.$invalid && IspForm.ispName.$dirty }">
+            Diga o nome do seu provedor
+          </label>
+          <input name="ispName" class="form-control" type="text" ng-required="required" ng-model="vm.userData.isp.name" placeholder="Nome do provedor" uib-typeahead="isp.name for isp in vm.isps | filter:$viewValue | limitTo:5">
+          <div class="msg-block" ng-if="IspForm.ispName.$error.required">
+            Por favor, preencha o nome do seu provedor de Internet.
+          </div>
+        </div>
 
-    <div class="form-group row"  ng-if="vm.userIsp.name">
-      <label class="col-xs-12 col-sm-12 col-md-12"> Velocidade de <strong>Download</strong> Contratada </label>
-      <div class="col-xs-10 col-sm-6 col-md-8">
-        <input class="form-control" ng-model="vm.userIsp.plan.download.speed" uib-typeahead="speed for speed in vm.speeds" placeholder="xx Mbps" ng-required="required" type="number">
+        <label class="col-xs-12 col-sm-12 col-md-8"> Cidade e estado </label>
+        <div class="col-xs-12 col-sm-12 col-md-4">
+          <div class="btn-group" uib-dropdown>
+            <button id="btn-append-to-single-button" type="button" class="btn btn-default" uib-dropdown-toggle>
+              {{vm.userData.isp.plan.region.city || "Cidade"}}
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
+              <li role="menuitem" ng-repeat="city in vm.cities"><a ng-click="vm.selectCity(city)">{{city}}</a></li>
+            </ul>
+          </div>
+          <div class="btn-group" uib-dropdown>
+            <button id="btn-append-to-single-button" type="button" class="btn btn-default" uib-dropdown-toggle>
+              {{vm.userData.isp.plan.region.state || "Estado"}}
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
+              <li role="menuitem" ng-repeat="state in vm.states"><a ng-click="vm.selectState(state.sigla)">{{state.nome}}</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div class="col-xs-2 col-sm-6 col-md-4">
-        <select class="" name="dowload-unit" id="dowload-unit" ng-model="vm.userIsp.plan.download.unit" ng-if="vm.userIsp.plan.download.speed" ng-required="required">
-          <option ng-repeat="unit in vm.speedUnits" value="{{unit}}">
-            {{unit}}
-          </option>
-        </select>
-      </div>
-    </div>
 
-    <div class="form-group row" ng-if="vm.userIsp.plan.download.unit">
-      <label class="col-xs-12 col-sm-12 col-md-12"> Velocidade de <strong>Upload</strong> Contratada </label>
-      <div class="col-xs-10 col-sm-6 col-md-8">
-        <input class="form-control" ng-model="vm.userIsp.plan.upload.speed" uib-typeahead="speed for speed in vm.speeds" placeholder="x Mbps" ng-required="required" bs-typeahead type="number">
+      <div class="form-group row"  ng-if="vm.userData.isp.name">
+        <label class="col-xs-12 col-sm-12 col-md-12"> Velocidade de <strong>Download</strong> Contratada </label>
+        <div class="col-xs-10 col-sm-6 col-md-8">
+          <input class="form-control" ng-model="vm.userData.isp.plan.download.speed" uib-typeahead="speed for speed in vm.speeds" placeholder="xx Mbps" ng-required="required" type="number">
+        </div>
+        <div class="col-xs-2 col-sm-6 col-md-4">
+          <select class="" name="dowload-unit" id="dowload-unit" ng-model="vm.userData.isp.plan.download.unit" ng-if="vm.userData.plan.download.speed" ng-required="required">
+            <option ng-repeat="unit in vm.speedUnits" value="{{unit}}">
+              {{unit}}
+            </option>
+          </select>
+        </div>
       </div>
-      <div class="col-xs-2 col-sm-6 col-md-4">
-        <select class="" name="upload-unit" id="upload-unit" ng-model="vm.userIsp.plan.upload.unit" ng-if="vm.userIsp.plan.upload.speed" ng-required="required">
-          <option ng-repeat="unit in vm.speedUnits" value="{{unit}}">
-            {{unit}}
-          </option>
-        </select>
+
+      <div class="form-group row" ng-if="vm.userData.isp.plan.download.speed">
+        <label class="col-xs-12 col-sm-12 col-md-12"> Velocidade de <strong>Upload</strong> Contratada </label>
+        <div class="col-xs-10 col-sm-6 col-md-8">
+          <input class="form-control" ng-model="vm.userData.isp.plan.upload.speed" uib-typeahead="speed for speed in vm.speeds" placeholder="x Mbps" ng-required="required" bs-typeahead type="number">
+        </div>
+        <div class="col-xs-2 col-sm-6 col-md-4">
+          <select class="" name="upload-unit" id="upload-unit" ng-model="vm.userData.isp.plan.upload.unit" ng-if="vm.userData.isp.plan.upload.speed" ng-required="required">
+            <option ng-repeat="unit in vm.speedUnits" value="{{unit}}">
+              {{unit}}
+            </option>
+          </select>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
 
   <hr>

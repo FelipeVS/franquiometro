@@ -97,6 +97,10 @@ p{
 	box-shadow: none;
 }
 
+.has-error {
+	color: red;
+}
+
 /*---- responsive-design -----*/
 
 @media(max-width:1024px){

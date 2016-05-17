@@ -8,7 +8,7 @@
     <div class="form-group row">
       <div class="container-fluid">
 
-        <div class="row" ng-if="!vm.profile.media.answered && !vm.profile.media.enabled">
+        <div class="row">
           <div class="col-xs-12	col-sm-12	col-md-12	col-lg-12">
             <label><h4>
               Quantas pessoas compartilham essa conexão?
@@ -17,140 +17,18 @@
           </div>
         </div>
 
-        <div class="row" ng-if="!vm.profile.media.answered && !vm.profile.media.enabled">
-          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
-            <label><h4>
-              <i class="fa fa-play"></i>
-              Usa Youtube, Neflix, vímeo, etc?
-            </h4></label>
-          </div>
 
-          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6 text-center" ng-if="!vm.profile.media.answered">
-            <button type="button" class="btn btn-success"  ng-click="vm.newModal('media');">
-              Sim
-            </button>
-            <button type="button" class="btn btn-danger"  ng-click="vm.cancelModal('media')">
-              Não
-            </button>
-          </div>
-        </div>
-
-        <div class="row" ng-if="vm.profile.media.answered && vm.profile.media.enabled">
-          <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" ng-click="vm.newModal('media')">
-            <label><h4>
-              <i class="fa fa-play"></i>
-              {{ vm.profile.media.short }}
-            </h4></label>
-          </div>
-        </div>
-
-        <div class="row" ng-if="vm.profile.media.answered && !vm.profile.media.enabled">
-          <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" ng-click="vm.newModal('media')">
-            <label><h4>
-              <i class="fa fa-play"></i>
-              Não consome mídias
-            </h4></label>
-          </div>
-        </div>
-
-        <hr> <!---------------------------------------->
-
-        <div class="row" ng-if="!vm.profile.games.answered && !vm.profile.games.enabled">
-          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
-            <label><h4>
-              <i class="fa fa-gamepad"></i>
-              Usa Steam, PSN, Xbox Live, etc?
-            </h4></label>
-          </div>
-
-          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6 text-center" ng-if="!vm.profile.games.answered">
-            <button type="button" class="btn btn-success"  ng-click="vm.newModal('games');">
-              Sim
-            </button>
-            <button type="button" class="btn btn-danger"  ng-click="vm.cancelModal('games')">
-              Não
-            </button>
-          </div>
-        </div>
-
-        <div class="row" ng-if="vm.profile.games.answered && vm.profile.games.enabled">
-          <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" ng-click="vm.newModal('games')">
-            <label><h4>
-              <i class="fa fa-gamepad"></i>
-              {{ vm.profile.games.short }}
-            </h4></label>
-          </div>
-        </div>
-
-        <div class="row" ng-if="vm.profile.games.answered && !vm.profile.games.enabled">
-          <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" ng-click="vm.newModal('games')">
-            <label><h4>
-              <i class="fa fa-gamepad"></i>
-              Não uso a internet para baixar jogos ou jogar online
-            </h4></label>
-          </div>
-        </div>
-      </div>
-
-      </div>
-
-        <!--
-        <div class="form-group row">
-
-          <hr>
-
-          <label>  <i class="fa fa-gamepad"></i>  Joga no pc, console, tablet, etc? </label>
-          <div class="col-xs-6 col-sm-12 col-md-12 col-lg-12">
-            <button type="button" class="btn btn-success"  ng-click="vm.newModal('games')">
-              Sim
-            </button>
-            <button type="button" class="btn btn-danger"  ng-click="vm.cancelGames()">
-              Não
-            </button>
-          </div>
-
-          <hr>
-
-          <label>  <i class="fa fa-cloud"></i>  Usa serviços de backup de dados na nuvem (Dropbox, Google Drive, OneDrive, etc)? </label>
-          <div class="col-xs-6 col-sm-12 col-md-12 col-lg-12">
-            <button type="button" class="btn btn-success"  ng-click="vm.newModal('cloud')">
-              Sim
-            </button>
-            <button type="button" class="btn btn-danger"  ng-click="vm.cancelCloud()">
-              Não
-            </button>
-          </div>
-
-        </div>
-
-        <div class="btn-group" ng-if="vm.profile.media.enabled">
-          <label class="btn btn-default" ng-model="vm.profile.media.youtube.enabled" uib-btn-checkbox>
-            <i class="fa fa-youtube"></i> Youtube
-          </label>
-          <br>
-          <hr>
-          <label class="btn btn-default" ng-model="vm.profile.media.neflix.enabled" uib-btn-checkbox>
-            <i class="fa fa-film"></i> Netflix
-          </label>
-          <br>
-          <hr>
-          <label class="btn btn-default" ng-model="vm.profile.games.steam.enabled" uib-btn-checkbox>
-            <i class="fa fa-gamepad"></i> Steam
-          </label>
-          <br>
-          <hr>
-          <label class="btn btn-default" ng-model="vm.profile.clouds.enabled" uib-btn-checkbox>
-            <i class="fa fa-cloud"></i> Nuvem
-          </label>
-        </div> -->
-
+        <app-group gname="'media'" gicon="'fa-play'" gtitle="'Usa Youtube, Neflix, vímeo, etc?'" ng-click="vm.saveGroupInProfile('media')"></app-group>
+        <app-group gname="'games'" gicon="'fa-gamepad'" gtitle="'Jogos?'" ng-click="vm.saveGroupInProfile('games')"></app-group>
+        <app-group gname="'cloud'" gicon="'fa-cloud'" gtitle="'Núvem?'" ng-click="vm.saveGroupInProfile('cloud')"></app-group>
+        <app-group gname="'work'" gicon="'fa-black-tie'" gtitle="'Precisa da internet para trabalhar?'" ng-click="vm.saveGroupInProfile('work')"></app-group>
 
       </div>
 
       <hr>
 
       <div class="text-center">
-        <button type="button" class="btn btn-default"  ng-click="vm.prevStep()">
+        <button type="button" class="btn btn-default" ng-click="vm.prevStep()">
           Voltar
         </button>
 
