@@ -14,6 +14,7 @@
         var ispsUrl = serverUrl + '/api/isps'
         var service = {
             getAll: getAll,
+            find: find,
             postIsp: postIsp,
             getIsp: getIsp,
             updateIsp: updateIsp,
@@ -31,14 +32,24 @@
               .catch(getIspsFailed);
         }
 
+        function find(isp) {
+            return $http({
+                method: 'GET',
+                url: ispsUrl,
+                params: {name: isp.name}
+            })
+             .then(findIspComplete)
+             .catch(findIspFailed);
+        }
+
         function postIsp (isp) {
-          $http({
-              method: 'POST',
-              url: ispsUrl,
-              data: isp
-          })
-           .then(postIspComplete)
-           .catch(postIspFailed);
+            $http({
+                method: 'POST',
+                url: ispsUrl,
+                data: isp
+            })
+             .then(postIspComplete)
+             .catch(postIspFailed);
         }
 
         function getIsp () {
@@ -46,11 +57,11 @@
         }
 
         function updateIsp(isp) {
-          console.log('Updating ' + isp.name)
-
-          $http.put(ispsUrl, isp, {params: {name: isp.name}})
-         .then(postIspComplete)
-         .catch(postIspFailed);
+          $http.put(ispsUrl, isp, {
+              params: {id: isp._id}
+          })
+         .then(updateIspComplete)
+         .catch(updateIspFailed);
         }
 
         function deleteIsp(isp) {
@@ -72,12 +83,27 @@
           console.log("GET ERROR!\nData: ", data.data, "\nStatus: ", data.status, "\nHeaders: ", data.header, "\nConfig: ", data.config)
         }
 
+        function findIspComplete(response) {
+            return response.data;
+        }
+        function findIspFailed(data) {
+          console.log("FIND ERROR!\nData: ", data.data, "\nStatus: ", data.status, "\nHeaders: ", data.header, "\nConfig: ", data.config)
+        }
+
         function postIspComplete(response) {
            console.log("POST successful!", response)
         }
         function postIspFailed(data) {
            console.log("POST ERROR!\nData: ", data.data, "\nStatus: ", data.status, "\nHeaders: ", data.header, "\nConfig: ", data.config)
         }
+
+        function updateIspComplete(response) {
+           console.log("UPDATE successful!", response)
+        }
+        function updateIspFailed(data) {
+           console.log("UPDATE ERROR!\nData: ", data.data, "\nStatus: ", data.status, "\nHeaders: ", data.header, "\nConfig: ", data.config)
+        }
+
 
         function deleteIspComplete(response) {
            console.log("DELETE successful!", response)

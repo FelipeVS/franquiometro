@@ -2,13 +2,18 @@
   <img src="images/smile.png">
 </div>
 
-<div class="text">
+<div class="text" ng-if="vm.doingCalculations">
+  <h1> Calculando </h1>
+  <p> Guenta firme aí, seu bosta! </p>
+</div>
+
+<div class="text" ng-if="!vm.doingCalculations">
   <h1> Resultado </h1>
   <p> Isso é o quanto você está ferrado. FUFUFU </p>
   <p>Please check the url or go to <a href="#">main page</a> and see if you can locate what you are looking for</p>
 </div>
 
-<div class="bigButton">
+<div class="bigButton" ng-if="!vm.doingCalculations">
   <button type="button" class="btn btn-default" ng-click="vm.share()">
     Compartilhar
   </button>

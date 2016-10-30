@@ -1,7 +1,8 @@
 ===:server
--finalizar api REST (problemas com o update, falta delete);
+-finalizar api REST (verificar existencia de plano);
 -modelo e rotas pra usuário (armazenamento de informações pessoais e perfil de uso)
 -melhorar gulpfile (build, watch, etc)
+-HTTPS
 
 ===:public
 -criar serviço pra consulta da cidade/estado

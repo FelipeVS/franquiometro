@@ -1,1 +1,13 @@
-<h2> Consumo de Jogos digitais </h2>
+<div class="container">
+  <div class="text-center">
+    <h4> Seu perfil de consumo de jogos </h4>
+  </div>
+  <uib-tabset active="active">
+    <uib-tab index="$index" ng-repeat="tab in vm.tabs" select="tab.enabled = !tab.enabled">
+      <uib-tab-heading>
+        {{tab.title}} <a ng-click="vm.removeTab($index)" href=''><i class="fa fa-times"></i></a>
+      </uib-tab-heading>
+      <ng-include src="'app/layout/modal/games/' + tab.type + '.tab.html'"></ng-include>
+    </uib-tab>
+  </uib-tabset>
+</div>

@@ -3,12 +3,12 @@
 
     angular
     .module('app.main')
-    .controller('WorkController', WorkController);
+    .controller('WorkController', workController);
 
-    WorkController.$inject = [];
+    workController.$inject = [];
 
     /* @ngInject */
-    function WorkController() {
+    function workController() {
         var vm = this;
 
         activate();

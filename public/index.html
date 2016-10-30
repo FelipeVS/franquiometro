@@ -5,7 +5,7 @@
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
         <base href="/">
 
-        <title></title>
+        <title> Franquiômetro </title>
 
         <!-- bootstrap css -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css">
@@ -19,25 +19,21 @@
     <body>
 
         <!-- activity progress bar -->
-        <div ng-hide="progressBar.hide">
-          <uib-progress>
-            <uib-bar ng-repeat="bar in progressBar track by $index" value="progressBar.value" type="warning">
-            </uib-bar>
-          </uib-progress>
-        </div>
+        <uib-progress ng-hide="progressBar.hide">
+          <uib-bar ng-repeat="bar in progressBar track by $index" value="progressBar.value" type="warning">
+          </uib-bar>
+        </uib-progress>
 
         <!-- dynamic content container -->
         <div class="container-fluid body-content" ui-view>
         </div>
 
         <!-- footer -->
-        <nav class="navbar navbar-fixed-bottom">
-          <div class="container">
-            <p>
-              &copy; 2016 Franquiômetro. Todos os direitos reservados | Criado por <a href="http://www.felipeveloso.tk">Felipe Veloso</a>
-            </p>
-          </div>
-        </nav>
+        <div class="container">
+          <p>
+            &copy; 2016 Franquiômetro. Todos os direitos reservados | Criado por <a href="http://www.felipeveloso.tk">Felipe Veloso</a>
+          </p>
+        </div>
 
         <!-- scripts  -->
         <!-- angular -->
@@ -77,8 +73,12 @@
         <script src="app/services/isps.service.js"></script>
         <script src="app/services/ip.service.js"></script>
         <script src="app/services/progress.bar.service.js"></script>
+        <script src="app/services/geolocation.service.js"></script>
+        <script src="app/services/city-and-state.service.js"></script>
 
+        <script src="app/services/user.factory.js"></script>
         <script src="app/services/profile.factory.js"></script>
+
 
         <script src="app/directives/appGroups.js"></script>
 

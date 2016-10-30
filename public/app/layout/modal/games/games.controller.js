@@ -3,12 +3,12 @@
 
     angular
     .module('app.main')
-    .controller('GamesController', GamesController);
+    .controller('GamesController', gamesController);
 
-    GamesController.$inject = [];
+    gamesController.$inject = [];
 
     /* @ngInject */
-    function GamesController() {
+    function gamesController() {
         var vm = this;
 
         activate();

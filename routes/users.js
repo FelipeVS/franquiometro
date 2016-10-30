@@ -1,9 +1,9 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var users = require('../models/users');
+var users = require("../models/users");
 
 // find all songs route
-router.get('/', function(req, res, next) {
+router.get("/", function(req, res, next) {
   users.find({}, function(err, data) {
 		if (err) {
 			res.sendStatus(500);
@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 		}
 	});
 });
-router.get('/:id', function(req, res, next) {
+router.get("/:id", function(req, res, next) {
   var query = { _id: req.params.id };
 	users.findOne(query, function(err, data) {
 		if (err || data == null) {
@@ -22,7 +22,7 @@ router.get('/:id', function(req, res, next) {
 		}
 	});
 });
-router.post('/', function(req, res, next) {
+router.post("/", function(req, res, next) {
   var user = new users(req.body);
 	user.save(function(err, user) {
 		console.log(user);
@@ -33,7 +33,7 @@ router.post('/', function(req, res, next) {
 		}
 	});
 });
-router.put('/:id', function(req, res, next) {
+router.put("/:id", function(req, res, next) {
   var query = { _id: req.params.id };
 	var mod = req.body;
 	delete mod._id;
@@ -46,7 +46,7 @@ router.put('/:id', function(req, res, next) {
 		}
 	});
 });
-router.delete('/:id', function(req, res, next) {
+router.delete("/:id", function(req, res, next) {
   var query = { _id: req.params.id };
 
 	users.remove(query, function(err, data) {

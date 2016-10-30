@@ -10,9 +10,15 @@
 
     /* @ngInject */
     function ProgressBarService($rootScope, $timeout) {
+
+        var overalProgressSteps;
+        var currentProgressStep = 0;
+
         var service = {
-            set: set
+            set: set,
+            increment: increment
         };
+
         $rootScope.progressBar = {
           "hide" : false
         }
@@ -21,7 +27,12 @@
 
         ////////////////
 
-        function set(value) {
+        function set(value, steps) {
+          if (steps) {
+            overalProgressSteps = steps;
+            currentProgressStep = 0;
+          }
+
           $rootScope.progressBar.value = value;
 
           if ($rootScope.progressBar.value === 0) {
@@ -35,5 +46,10 @@
           }
         }
 
+        function increment() {
+          currentProgressStep += 1;
+          var progressRatio = (currentProgressStep / overalProgressSteps) * 100;
+          this.set(progressRatio, null)
+        }
     }
 })();

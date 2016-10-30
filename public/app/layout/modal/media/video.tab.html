@@ -1,0 +1,53 @@
+<uib-accordion close-others="true">
+    <uib-accordion-group class="text-center" heading="Quantos vídeos você vê por dia, aproximadamente?">
+      <div class="btn-group col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <label class="btn btn-default col-xs-2 col-sm-2 col-md-1 col-lg-1" ng-model="vm.mediaProfile.apps.video.profile.dailyVideos" ng-change="vm.updateProfile('media', 'video')" uib-btn-radio="{{number}}" ng-repeat="number in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
+          {{number}}
+        </label>
+        <label class="btn btn-default col-xs-4 col-sm-4 col-md-2 col-lg-2" ng-model="vm.mediaProfile.apps.video.profile.dailyVideos" ng-change="vm.updateProfile('media', 'video')" uib-btn-radio="11">
+          Muitos
+        </label>
+      </div>
+    </uib-accordion-group>
+
+    <uib-accordion-group class="text-center" heading="Em que resolução você normalmente assiste esses vídeos?" ng-if="vm.mediaProfile.apps.video.profile.dailyVideos">
+      <div class="btn-group col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <label class="btn btn-default col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-model="vm.mediaProfile.apps.video.profile.resolution" ng-change="vm.updateProfile('media', 'video')" uib-btn-radio="1">
+          Baixa <br><small>(240p, 480p)</small>
+        </label>
+        <label class="btn btn-default col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-model="vm.mediaProfile.apps.video.profile.resolution" ng-change="vm.updateProfile('media', 'video')" uib-btn-radio="2">
+          HD <br><small>(720p)</small>
+        </label>
+        <label class="btn btn-default col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-model="vm.mediaProfile.apps.video.profile.resolution" ng-change="vm.updateProfile('media', 'video')" uib-btn-radio="3">
+          FullHD <br><small>(1080p)</small>
+        </label>
+        <label class="btn btn-default col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-model="vm.mediaProfile.apps.video.profile.resolution" ng-change="vm.updateProfile('media', 'video')" uib-btn-radio="4">
+          Altíssima <br><small>(1440p, 4k,...)</small>
+        </label>
+      </div>
+    </uib-accordion-group>
+
+    <uib-accordion-group class="text-center" heading="Qual a duração desses vídeos (baseado nos de maior duração)?" ng-if="vm.mediaProfile.apps.video.profile.resolution">
+      <div class="btn-group col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <label class="btn btn-default col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-model="vm.mediaProfile.apps.video.profile.duration" ng-change="vm.updateProfile('media', 'video')" uib-btn-radio="1">
+          Curtos <br><small>(até 5 minutos)</small>
+        </label>
+        <label class="btn btn-default col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-model="vm.mediaProfile.apps.video.profile.duration" ng-change="vm.updateProfile('media', 'video')" uib-btn-radio="2">
+          Médios <br><small>(até 15minutos)</small>
+        </label>
+        <label class="btn btn-default col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-model="vm.mediaProfile.apps.video.profile.duration" ng-change="vm.updateProfile('media', 'video')" uib-btn-radio="3">
+          Longos <br><small>(até 45minutos)</small>
+        </label>
+        <label class="btn btn-default col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-model="vm.mediaProfile.apps.video.profile.duration" ng-change="vm.updateProfile('media', 'video')" uib-btn-radio="4">
+          Muito longos <br><small>(1h, 2h,...)</small>
+        </label>
+      </div>
+    </uib-accordion-group>
+
+</uib-accordion>
+
+<hr>
+<br>
+
+{{vm.tabs[0]}}
+<br><br><br>

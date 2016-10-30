@@ -1,10 +1,11 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 
 var ispModel = new mongoose.Schema({
 	name: { type: String, required: true },
 	plans: [
 		{
 			region: {
+				neighborhood: {type: String, required: true},
 				city: {type: String, required: true},
 				state: {type: String, required: true}
 			},
@@ -20,6 +21,6 @@ var ispModel = new mongoose.Schema({
 	]
 },
 {
-	collection : 'isps'
+	collection : "isps"
 });
-module.exports = mongoose.model('ispModel', ispModel);
+module.exports = mongoose.model("ispModel", ispModel);

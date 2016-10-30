@@ -1,0 +1,33 @@
+<uib-accordion close-others="true">
+    <uib-accordion-group class="text-center" heading="Quantas fotos você vizualiza ou faz upload por dia, aproximadamente">
+      <div class="btn-group col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <label class="btn btn-default col-xs-2 col-sm-2 col-md-1 col-lg-1" ng-model="vm.tabs[2].profile.dailyVideos" uib-btn-radio="{{number}}" ng-repeat="number in [10, 25, 50, 100]">
+          {{number}}
+        </label>
+        <label class="btn btn-default col-xs-4 col-sm-4 col-md-2 col-lg-2" ng-model="vm.tabs[2].profile.dailyVideos" uib-btn-radio="1000">
+          Muitas
+        </label>
+      </div>
+    </uib-accordion-group>
+
+    <uib-accordion-group class="text-center" heading="Em que resolução você normalmente vê ou faz upload?" ng-if="vm.tabs[2].profile.dailyVideos">
+      <div class="btn-group col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <label class="btn btn-default col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-model="vm.tabs[2].profile.resolution" uib-btn-radio="1">
+          Baixa <br><small>(1 megapixel)</small>
+        </label>
+        <label class="btn btn-default col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-model="vm.tabs[2].profile.resolution" uib-btn-radio="2">
+          média <br><small>(até 10mp)</small>
+        </label>
+        <label class="btn btn-default col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-model="vm.tabs[2].profile.resolution" uib-btn-radio="3">
+          alta <br><small>(acima de 10mp)</small>
+        </label>
+      </div>
+    </uib-accordion-group>
+
+</uib-accordion>
+
+<hr>
+<br>
+
+{{vm.tabs[2]}}
+<br><br><br>

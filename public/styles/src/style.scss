@@ -101,6 +101,15 @@ p{
 	color: red;
 }
 
+.scroll-dropdown {
+	height: 100px;
+	overflow-y: auto;
+}
+
+.tab-active {
+	font-weight: bold;
+	font-size: 1.1em;
+}
 /*---- responsive-design -----*/
 
 @media(max-width:1024px){

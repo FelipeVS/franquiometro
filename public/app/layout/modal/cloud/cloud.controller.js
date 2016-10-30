@@ -3,12 +3,12 @@
 
     angular
     .module('app.main')
-    .controller('CloudController', CloudController);
+    .controller('CloudController', cloudController);
 
-    CloudController.$inject = [];
+    cloudController.$inject = [];
 
     /* @ngInject */
-    function CloudController() {
+    function cloudController() {
         var vm = this;
 
         activate();

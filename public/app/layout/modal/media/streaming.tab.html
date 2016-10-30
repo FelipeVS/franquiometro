@@ -1,0 +1,64 @@
+<div class="text-center">
+  <label class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    O que você assiste?
+  </label>
+  <div class="btn-group">
+      <label class="btn btn-default" ng-model="vm.mediaProfile.apps.streaming.profile.series.enabled"  ng-change="vm.updateProfile('media', 'streaming')" uib-btn-checkbox>Séries</label>
+      <label class="btn btn-default" ng-model="vm.mediaProfile.apps.streaming.profile.movies.enabled"  ng-change="vm.updateProfile('media', 'streaming')" uib-btn-checkbox>Filmes</label>
+  </div>
+</div>
+
+<uib-accordion close-others="true">
+    <uib-accordion-group class="text-center" heading="Quantos episódios você vê por dia, aproximadamente?" ng-if="vm.mediaProfile.apps.streaming.profile.series.enabled">
+      <div class="btn-group col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <label class="btn btn-default col-xs-2 col-sm-2 col-md-1 col-lg-1" ng-model="vm.mediaProfile.apps.streaming.profile.series.daily"  ng-change="vm.updateProfile('media', 'streaming')" uib-btn-radio="{{number}}" ng-repeat="number in [1, 2, 3, 4, 5]">
+          {{number}}
+        </label>
+        <label class="btn btn-default col-xs-4 col-sm-4 col-md-2 col-lg-2" ng-model="vm.mediaProfile.apps.streaming.profile.series.daily"  ng-change="vm.updateProfile('media', 'streaming')" uib-btn-radio="6">
+          Muitos
+        </label>
+      </div>
+    </uib-accordion-group>
+
+    <uib-accordion-group class="text-center" heading="Em que resolução você normalmente assiste esses episódios?" ng-if="vm.mediaProfile.apps.streaming.profile.series.enabled && vm.mediaProfile.apps.streaming.profile.series.daily">
+      <div class="btn-group col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <label class="btn btn-default col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-model="vm.mediaProfile.apps.streaming.profile.series.resolution"  ng-change="vm.updateProfile('media', 'streaming')" uib-btn-radio="1">
+          Média <br><small>(Smartphone ou Tablets)</small>
+        </label>
+        <label class="btn btn-default col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-model="vm.mediaProfile.apps.streaming.profile.series.resolution"  ng-change="vm.updateProfile('media', 'streaming')" uib-btn-radio="2">
+          Alta <br><small>(PC ou TV)</small>
+        </label>
+      </div>
+    </uib-accordion-group>
+
+    <uib-accordion-group class="text-center" heading="Quantos filmes você vê por dia, aproximadamente?" ng-if="vm.mediaProfile.apps.streaming.profile.movies.enabled">
+      <div class="btn-group col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <label class="btn btn-default col-xs-2 col-sm-2 col-md-1 col-lg-1" ng-model="vm.mediaProfile.apps.streaming.profile.movies.daily"  ng-change="vm.updateProfile('media', 'streaming')" uib-btn-radio="{{number}}" ng-repeat="number in [1, 2, 3, 4, 5]">
+          {{number}}
+        </label>
+        <label class="btn btn-default col-xs-4 col-sm-4 col-md-2 col-lg-2" ng-model="vm.mediaProfile.apps.streaming.profile.movies.daily"  ng-change="vm.updateProfile('media', 'streaming')" uib-btn-radio="6">
+          Muitos
+        </label>
+      </div>
+    </uib-accordion-group>
+
+    <uib-accordion-group class="text-center" heading="Em que resolução você normalmente assiste esses filmes?" ng-if="vm.mediaProfile.apps.streaming.profile.movies.enabled && vm.mediaProfile.apps.streaming.profile.movies.daily">
+      <div class="btn-group col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <label class="btn btn-default col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-model="vm.mediaProfile.apps.streaming.profile.movies.resolution"  ng-change="vm.updateProfile('media', 'streaming')" uib-btn-radio="1">
+          Média <br><small>(Smartphone ou Tablets)</small>
+        </label>
+        <label class="btn btn-default col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-model="vm.mediaProfile.apps.streaming.profile.movies.resolution"  ng-change="vm.updateProfile('media', 'streaming')" uib-btn-radio="2">
+          Alta <br><small>(PC ou TV)</small>
+        </label>
+      </div>
+    </uib-accordion-group>
+
+
+
+</uib-accordion>
+
+<hr>
+<br>
+
+{{vm.tabs[1]}}
+<br><br><br>

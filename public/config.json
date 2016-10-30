@@ -1,12 +1,15 @@
 {
   "name": "app.core.constants",
   "production": {
-    "serverUrl": "http://franquiometro.herokuapp.com"
+    "serverUrl": "http://franquiometro.herokuapp.com",
+    "gMaps_API_KEY": "AIzaSyBxlL-YxlNIMqogj2X4krtJ9oQMp8hmSTE"
   },
   "development": {
-    "serverUrl": "http://localhost:3000"
+    "serverUrl": "http://localhost:3000",
+    "gMaps_API_KEY": "AIzaSyBxlL-YxlNIMqogj2X4krtJ9oQMp8hmSTE"
   },
   "test": {
-    "serverUrl": "http://localhost:3000"
+    "serverUrl": "http://localhost:3000",
+    "gMaps_API_KEY": "AIzaSyBxlL-YxlNIMqogj2X4krtJ9oQMp8hmSTE"
   }
 }
