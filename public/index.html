@@ -25,7 +25,21 @@
         </uib-progress>
 
         <!-- dynamic content container -->
-        <div class="container-fluid body-content" ui-view>
+        <div class="container-fluid">
+          <div class="image">
+            <img src="images/smile.png">
+          </div>
+          <div class="container-fluid body-content" ng-class="{'hasProgressBar' : progressBar.hide}" ui-view>
+          </div>
+          <div class="text-center body-nav">
+            <button type="button" class="btn btn-default" ng-click="prevStep()">
+              Voltar
+            </button>
+
+            <button type="button" class="btn btn-default" ng-click="nextStep()">
+              Próximo
+            </button>
+          </div>
         </div>
 
         <!-- footer -->

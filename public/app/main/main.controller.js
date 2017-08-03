@@ -12,13 +12,10 @@
 
         // public
         var vm = this;
-        vm.appStep = 2; // screen number starts at 0
         vm.speeds = [1,2,3,5,8,10,15,20,25,35,50,100];
         vm.speedUnits = [ "Kbps", "Mbps", "Gbps"];
 
         //shared
-        vm.prevStep = prevStep; // prev screen
-        vm.nextStep = nextStep; // next screen
         vm.hasGeolocationEnabled = hasGeolocationEnabled;
 
         // intro
@@ -94,28 +91,6 @@
 
         ///////////////////
         // shared
-
-        function prevStep() {
-          vm.appStep -= 1;
-          openTooltips();
-        }
-
-        function nextStep() {
-            vm.appStep += 1;
-            openTooltips();
-            if (vm.firstStepCompleted()) {
-                vm.postIsp(vm.userData.isp);
-            }
-            if (vm.secondStepCompleted()) {
-                ProgressBarService.set(0,5);
-                vm.doingCalculations = true;
-                $interval(function functionName() {
-                    ProgressBarService.increment();
-                }, 500, 5).then(function () {
-                    vm.doingCalculations = false;
-                })
-            }
-        }
 
         function hasGeolocationEnabled() {
             if ("geolocation" in navigator) {
